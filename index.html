@@ -4,11 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script>
+  <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
   <title>Make some 3d shit</title>
 </head>
 <body>
-  <audio src="mc.mp3" autoplay></audio>
+  <script>
+    AFRAME.components["look-controls"].Component.prototype.onTouchMove = function (t) {
+        if (this.touchStarted && this.data.touchEnabled) {
+            this.pitchObject.rotation.x += .6 * Math.PI * (t.touches[0].pageY - this.touchStart.y) / this.el.sceneEl.canvas.clientHeight;
+            this.yawObject.rotation.y += /*  */ Math.PI * (t.touches[0].pageX - this.touchStart.x) / this.el.sceneEl.canvas.clientWidth;
+            this.pitchObject.rotation.x = Math.max(Math.PI / -2, Math.min(Math.PI / 2, this.pitchObject.rotation.x));
+            this.touchStart = {
+                x: t.touches[0].pageX,
+                y: t.touches[0].pageY
+            }
+        }
+    }
+  </script>
+  <audio src="test_song.mp3" autoplay></audio>
   <a-scene vr-mode-ui="enabled: false" physics="debug: true">
 
     <!-- * Чтобы не проваливатся добавил пол чуть больше чем комната -->
@@ -18,7 +33,9 @@
     <!-- TODO Если получится пихнуть камеру в модельку и на ее внешнюю сторону наложить static-body, то это нужный вариант -->
     <!-- <a-entity static-body gltf-model="rooms/apartment_room_1/scene.gltf" position="0 0 0" rotation="0 0 0" width="2"></a-entity> -->
     <a-entity id="rig" movement-controls="speed:0.2">
-      <a-entity camera position="5 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls="acceleration:20" ></a-entity>
+      <a-entity camera
+                position="5 1.6 0"
+                look-controls="pointerLockEnabled: true"></a-entity>
     </a-entity>
   </a-scene>
 </body>
