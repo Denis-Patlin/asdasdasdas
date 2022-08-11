@@ -18,11 +18,7 @@
     <!-- TODO Если получится пихнуть камеру в модельку и на ее внешнюю сторону наложить static-body, то это нужный вариант -->
     <!-- <a-entity static-body gltf-model="rooms/apartment_room_1/scene.gltf" position="0 0 0" rotation="0 0 0" width="2"></a-entity> -->
     <a-entity id="rig" movement-controls="speed:0.2">
-      <a-entity acceleration="10"
-      position="0 1.6 0"
-      camera
-      look-controls="magicWindowTrackingEnabled: false"
-      wasd-controls></a-entity>
+      <a-entity camera position="5 1.6 0" look-controls="pointerLockEnabled: true" wasd-controls="acceleration:20" ></a-entity>
     </a-entity>
   </a-scene>
 </body>
