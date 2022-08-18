@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
   <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.0/dist/aframe-extras.min.js"></script>
-  <script src="https://rawgit.com/protyze/aframe-always-fullscreen-component/master/dist/aframe-always-fullscreen-component.min.js"></script>
   <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.3.0/dist/aframe-physics-system.min.js"></script>
   <title>Make some 3d shit</title>
 </head>
@@ -25,7 +24,7 @@
     }
   </script>
   <audio src="test_song.mp3" autoplay></audio>
-  <a-scene vr-mode-ui="enabled: false" physics="debug: true" embedded always-fullscreen>
+  <a-scene vr-mode-ui="enabled: false" physics="debug: true">
 
     <!-- * Чтобы не проваливатся добавил пол чуть больше чем комната -->
     <a-grid static-body></a-grid>
@@ -34,27 +33,10 @@
     <!-- TODO Если получится пихнуть камеру в модельку и на ее внешнюю сторону наложить static-body, то это нужный вариант -->
     <!-- <a-entity static-body gltf-model="rooms/apartment_room_1/scene.gltf" position="0 0 0" rotation="0 0 0" width="2"></a-entity> -->
     <a-entity id="rig" movement-controls="speed:0.2">
-      <a-entity id="cam1"
-              camera="active: true"
+      <a-entity camera
                 position="5 1.6 0"
                 look-controls="pointerLockEnabled: true"></a-entity>
     </a-entity>
-
-    <a-entity id="cam2"
-              camera="active: false"
-              position="8 5 0"
-              look-controls="pointerLockEnabled: true"></a-entity>
-
-    <div style='position: fixed; top: 1rem; left: 1rem; width:100%; z-index: 1;'>
-      <button class="switch_cam">
-        CAM
-      </button>
-    </div>
   </a-scene>
-
-  <script>
-    document.querySelector('.switch_cam').addEventListener("click", (e)=>{
-    })
-  </script>
 </body>
 </html>
